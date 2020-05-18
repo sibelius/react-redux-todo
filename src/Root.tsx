@@ -1,13 +1,12 @@
 import React from 'react';
 import App from './App';
-import { Provider } from 'react-redux';
-import store from './store';
+import { RecoilRoot } from 'recoil';
 
 const Root = () => {
   return (
-    <Provider store={store}>
+    <RecoilRoot>
       <App />
-    </Provider>
+    </RecoilRoot>
   );
 }
 

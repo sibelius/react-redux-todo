@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getTodoListStats } from './store';
+import { useRecoilValue } from 'recoil';
+import { todoListStatsState } from './TodoAtoms';
 
 const TodoListStats = () => {
   const {
@@ -8,7 +8,7 @@ const TodoListStats = () => {
     totalCompletedNum,
     totalUncompletedNum,
     percentCompleted,
-  } = useSelector(getTodoListStats);
+  } = useRecoilValue(todoListStatsState);
 
   const formattedPercentCompleted = Math.round(percentCompleted * 100);
 
