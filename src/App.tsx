@@ -1,14 +1,14 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { filteredTodoListState } from './TodoAtoms';
 import TodoItemCreator from './TodoItemCreator';
 import TodoItem from './TodoItem';
 import { Text } from 'rebass';
 import TodoListFilters from './TodoListFilters';
 import TodoListStats from './TodoListStats';
-import { useSelector } from 'react-redux';
-import { getVisibleTodos } from './store';
 
 const App = () => {
-  const todoList = useSelector(getVisibleTodos);
+  const todoList = useRecoilValue(filteredTodoListState);
 
   return (
     <>

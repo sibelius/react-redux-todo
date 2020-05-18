@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSetRecoilState } from 'recoil';
+import { todoListState } from './TodoAtoms';
 
 // utility for creating unique Id
 let id = 0;
@@ -9,19 +10,17 @@ function getId() {
 
 const TodoItemCreator = () => {
   const [inputValue, setInputValue] = useState('');
-
-  const dispatch = useDispatch();
+  const setTodoList = useSetRecoilState(todoListState);
 
   const addItem = () => {
-    dispatch({
-      type: 'TODO_ADD',
-      todo:
+    setTodoList((oldTodoList) => [
+      ...oldTodoList,
       {
         id: getId(),
-          text: inputValue,
+        text: inputValue,
         isComplete: false,
       },
-    })
+    ]);
   };
 
   const onChange = ({target: {value}}) => {

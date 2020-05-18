@@ -1,15 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { todoListFilterState } from './TodoAtoms';
+import { useRecoilState } from 'recoil';
 
 const TodoListFilters = () => {
-  const filter = useSelector(state => state.visibilityFilter);
-  const dispatch = useDispatch();
+  const [filter, setFilter] = useRecoilState(todoListFilterState);
 
   const updateFilter = ({target: {value}}) => {
-    dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: value,
-    });
+    setFilter(value);
   };
 
   return (

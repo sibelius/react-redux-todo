@@ -25,6 +25,7 @@
     "reselect": "4.0.0",
     "styled-components": "5.1.0",
     "styled-system": "5.1.5",
+    "recoil": "0.0.7",
     "typescript": "3.9.2"
   },
   "devDependencies": {

@@ -1,38 +1,41 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRecoilState } from 'recoil';
+import { todoListState } from './TodoAtoms';
+
+function replaceItemAtIndex(arr, index, newValue) {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+}
+
+function removeItemAtIndex(arr, index) {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+}
 
 const TodoItem = ({ item }) => {
-  const dispatch = useDispatch();
-  const todoList = useSelector(state => state.todos);
+  const [todoList, setTodoList] = useRecoilState(todoListState);
   const index = todoList.findIndex((listItem) => listItem === item);
 
   const editItemText = ({target: {value}}) => {
-    dispatch({
-      type: 'TODO_EDIT',
-      index,
-      todo: {
-        ...item,
-        text: value,
-      },
-    })
+    const newList = replaceItemAtIndex(todoList, index, {
+      ...item,
+      text: value,
+    });
+
+    setTodoList(newList);
   };
 
   const toggleItemCompletion = () => {
-    dispatch({
-      type: 'TODO_EDIT',
-      index,
-      todo: {
-        ...item,
-        isComplete: !item.isComplete,
-      },
-    })
+    const newList = replaceItemAtIndex(todoList, index, {
+      ...item,
+      isComplete: !item.isComplete,
+    });
+
+    setTodoList(newList);
   };
 
   const deleteItem = () => {
-    dispatch({
-      type: 'TODO_DELETE',
-      index,
-    });
+    const newList = removeItemAtIndex(todoList, index);
+
+    setTodoList(newList);
   };
 
   return (
